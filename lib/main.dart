@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:touille/registry.dart';
 import 'package:touille/router.dart';
 import 'package:touille/views/nav_bar_screen.dart';
-import 'package:touille/views/recipes_list/recipes_list.dart';
-import 'package:touille/views/recipes_list/recipes_list_view_model.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:touille/infra/repositories/memory_recipe_repository.dart';
 import 'package:touille/router.dart';
-import 'package:touille/views/recipe/recipe.dart';
-import 'package:touille/views/recipe/recipe_view_model.dart';
 import 'package:touille/views/recipes_list/recipes_list_view_model.dart';
 
 class RecipesListScreen extends StatelessWidget {
