@@ -21,7 +21,7 @@ class RecipeHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Image.asset(
-          'assets/recipe-${recipeVM.recipeId}.png',
+          recipeVM.recipe!.image,
           fit: BoxFit.fill,
         ),
         Padding(

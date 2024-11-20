@@ -5,17 +5,23 @@ import 'package:touille/domain/repositories/recipe_repository.dart';
 class RecipeViewModel extends ChangeNotifier {
   final RecipeRepository _recipeRepository;
 
-  Recipe? recipe;
+  Recipe? _recipe;
   final String recipeId;
 
   RecipeViewModel(this._recipeRepository, this.recipeId);
 
+  Recipe? get recipe {
+    print('Getting recipe $recipeId: $_recipe');
+    return _recipe;
+  }
+
   Future<void> load() async {
-    if (recipe != null) {
+    print('Loading recipe $recipeId');
+    if (_recipe != null) {
       return;
     }
 
-    recipe = await _recipeRepository.getRecipe(recipeId);
+    _recipe = await _recipeRepository.getRecipe(recipeId);
     notifyListeners();
   }
 }

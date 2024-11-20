@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:touille/infra/repositories/memory_recipe_repository.dart';
+import 'package:touille/router.dart';
+import 'package:touille/views/recipe/recipe.dart';
+import 'package:touille/views/recipe/recipe_view_model.dart';
 import 'package:touille/views/recipes_list/recipes_list_view_model.dart';
 
 class RecipesListScreen extends StatelessWidget {
   final RecipesListViewModel recipesListVM;
+  final TouilleRouter router;
 
   const RecipesListScreen({
     super.key,
+    required this.router,
     required this.recipesListVM,
   });
 
   @override
   Widget build(BuildContext context) {
+    recipesListVM.load();
+
     return ListenableBuilder(
       listenable: recipesListVM,
       builder: (context, child) => RecipesListView(
+        router: router,
         recipesListVM: recipesListVM,
       ),
     );
@@ -23,30 +32,27 @@ class RecipesListScreen extends StatelessWidget {
 
 class RecipesListView extends StatefulWidget {
   final RecipesListViewModel recipesListVM;
+  final TouilleRouter router;
 
   const RecipesListView({
     super.key,
+    required this.router,
     required this.recipesListVM,
   });
 
   @override
-  State<RecipesListView> createState() {
-    print('Creating state for recipes list');
-    return _RecipesListViewState();
-  }
+  State<RecipesListView> createState() => _RecipesListViewState();
 }
 
 class _RecipesListViewState extends State<RecipesListView> {
   @override
   void initState() {
-    print('Init recipes list');
-    widget.recipesListVM.load();
     super.initState();
+    widget.recipesListVM.load();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('Build recipes list with ${widget.recipesListVM.recipes}');
     if (widget.recipesListVM.recipes == null) {
       return const Scaffold(
         body: Center(
@@ -74,7 +80,7 @@ class _RecipesListViewState extends State<RecipesListView> {
                 ),
               ),
               onPressed: () {
-                context.go('/recipe/${recipe.id}');
+                widget.router.goToRecipe(context, recipe.id);
               },
               child: ListTile(
                 title: Text(recipe.title),

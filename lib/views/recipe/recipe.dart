@@ -14,13 +14,9 @@ class RecipeScreen extends StatefulWidget {
 
 class _RecipeScreenState extends State<RecipeScreen> {
   @override
-  void initState() {
-    widget.recipeVM.load();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    widget.recipeVM.load();
+
     return ListenableBuilder(
       listenable: widget.recipeVM,
       builder: (context, child) => RecipeView(
@@ -41,18 +37,7 @@ class RecipeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (recipeVM.recipe == null) {
-      return const Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('chargement'),
-              SizedBox(height: 40),
-              CircularProgressIndicator(),
-            ],
-          ),
-        ),
-      );
+      return LoadingRecipeView();
     }
 
     return Scaffold(
@@ -62,6 +47,28 @@ class RecipeView extends StatelessWidget {
           children: [
             RecipeHeader(recipeVM: recipeVM),
             RecipeBody(recipeVM: recipeVM),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class LoadingRecipeView extends StatelessWidget {
+  const LoadingRecipeView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('chargement'),
+            SizedBox(height: 40),
+            CircularProgressIndicator(),
           ],
         ),
       ),
