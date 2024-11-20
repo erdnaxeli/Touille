@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:touille/views/recipe/recipe_view_model.dart';
 
 class RecipeBody extends StatelessWidget {
+  final RecipeViewModel recipeVM;
+
   const RecipeBody({
     super.key,
+    required this.recipeVM,
   });
 
   @override

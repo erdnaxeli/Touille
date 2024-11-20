@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:touille/view_models/recipe.dart';
+import 'package:touille/views/recipe/recipe_view_model.dart';
 
 class RecipePlayButton extends StatelessWidget {
   const RecipePlayButton({
@@ -10,17 +10,11 @@ class RecipePlayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return FilledButton(
       onPressed: () {
         var recipeVM = Provider.of<RecipeViewModel>(context, listen: false);
         context.go('/recipe/${recipeVM.recipeId}/play');
       },
-      style: TextButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-        ),
-      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
